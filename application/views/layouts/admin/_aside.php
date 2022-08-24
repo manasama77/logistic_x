@@ -109,7 +109,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('management_pengguna/master_user'); ?>" class="nav-link <?= ($this->uri->segment(1) == "management_pengguna/master_user") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_pengguna/master_user'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_user") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-users"></i>
 								<p>
 									Master User
@@ -117,7 +117,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('management_pengguna/master_divisi'); ?>" class="nav-link <?= ($this->uri->segment(1) == "management_pengguna/master_divisi") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_pengguna/master_divisi'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_divisi") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-tags"></i>
 								<p>
 									Master Divisi
