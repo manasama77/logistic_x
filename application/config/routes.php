@@ -17,9 +17,10 @@ $route['check_current_password'] = 'ProfileController/check_current_password';
 $route['update_password']        = 'ProfileController/update_password';
 $route['reset_password']         = 'ProfileController/reset_password';
 
-$route['management_pengguna/master_divisi']         = 'MasterDivisiController/index';
-$route['management_pengguna/master_divisi/store']   = 'MasterDivisiController/store';
-$route['management_pengguna/master_divisi/destroy'] = 'MasterDivisiController/destroy';
+$route['management_pengguna/master_divisi']               = 'MasterDivisiController/index';
+$route['management_pengguna/master_divisi/store']         = 'MasterDivisiController/store';
+$route['management_pengguna/master_divisi/destroy']       = 'MasterDivisiController/destroy';
+$route['management_pengguna/master_divisi/update/(:num)'] = 'MasterDivisiController/update/$1';
 
 $route['trade_manager/index']                        = 'TradeManagerController/index';
 $route['trade_manager/profit']                        = 'ProfitTradeManagerController/index';

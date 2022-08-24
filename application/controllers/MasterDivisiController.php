@@ -62,16 +62,23 @@ class MasterDivisiController extends CI_Controller
 		]);
 	}
 
-	public function reward()
+	public function update($id)
 	{
-		$arr = $this->M_accounting->get_list_reward();
-		$data = [
-			'title'      => APP_NAME . ' | Accounting Bonus',
-			'content'    => 'accounting/reward/main',
-			'vitamin_js' => 'accounting/reward/main_js',
-			'arr'        => $arr,
-		];
-		$this->template->render($data);
+		$where = ['id' => $id];
+		$data = ['name' => $this->input->post('name')];
+		$exec = $this->M_core->update('divisions', $data, $where);
+
+		$code    = 500;
+		$message = "Update Data Gagal";
+		if ($exec) {
+			$code    = 200;
+			$message = "Update Data Berhasil";
+		}
+
+		echo json_encode([
+			'code'    => $code,
+			'message' => $message,
+		]);
 	}
 
 	public function rekap()

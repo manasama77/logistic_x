@@ -1,4 +1,6 @@
 <script>
+	let id_edit = null;
+
 	$(document).ready(function() {
 		$("#table_data").DataTable({
 			"scrollX": "100%",
@@ -27,6 +29,66 @@
 				beforeSend: function() {
 					$.blockUI();
 					$('#btn_add').prop('disabled', true)
+				}
+			}).always(function(e) {
+				$.unblockUI();
+			}).fail(function(e) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					html: e.responseText,
+				});
+				$('#btn_add').prop('disabled', false)
+				console.log(e);
+			}).done(function(e) {
+				console.log(e);
+				if (e.code == 200) {
+					Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Success...',
+						text: e.message,
+						showConfirmButton: false,
+						timer: 2000,
+						timerProgressBar: true,
+						toast: true,
+					}).then((res) => {
+						window.location.reload();
+					});
+				} else if (e.code == 400 || e.code == 500) {
+					Swal.fire({
+						icon: 'warning',
+						title: 'Oops...',
+						text: e.message,
+					});
+					$('#btn_add').prop('disabled', false)
+				} else {
+					Swal.fire({
+						position: 'top-end',
+						icon: 'error',
+						title: 'Oops',
+						text: 'Unknown Response, please Contact Admin',
+						showConfirmButton: true,
+						timer: 2000,
+						timerProgressBar: true,
+					}).then((res) => {
+						window.location.reload();
+					});
+				}
+			});
+		});
+
+		$('#form_edit').on('submit', function(e) {
+			e.preventDefault();
+
+			$.ajax({
+				url: `<?= site_url('management_pengguna/master_divisi/update'); ?>/${id_edit}`,
+				method: 'post',
+				dataType: 'json',
+				data: $('#form_edit').serialize(),
+				beforeSend: function() {
+					$.blockUI();
+					$('#btn_edit').prop('disabled', true)
 				}
 			}).always(function(e) {
 				$.unblockUI();
@@ -146,5 +208,11 @@
 				$(`button[name="btn_delete_${id}"]`).prop('disabled', false)
 			}
 		});
+	}
+
+	function editData(id, name) {
+		id_edit = id
+		$('#name_edit').val(name)
+		$('#modal_edit').modal('show')
 	}
 </script>
