@@ -24,6 +24,11 @@ $route['management_barang/master_lokasi/store']         = 'MasterLokasiControlle
 $route['management_barang/master_lokasi/destroy']       = 'MasterLokasiController/destroy';
 $route['management_barang/master_lokasi/update/(:num)'] = 'MasterLokasiController/update/$1';
 
+$route['management_barang/kategori_barang']               = 'KategoriBarangController/index';
+$route['management_barang/kategori_barang/store']         = 'KategoriBarangController/store';
+$route['management_barang/kategori_barang/destroy']       = 'KategoriBarangController/destroy';
+$route['management_barang/kategori_barang/update/(:num)'] = 'KategoriBarangController/update/$1';
+
 
 $route['management_pengguna/master_divisi']               = 'MasterDivisiController/index';
 $route['management_pengguna/master_divisi/store']         = 'MasterDivisiController/store';

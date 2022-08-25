@@ -58,6 +58,14 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a href="<?= site_url('management_barang/kategori_barang'); ?>" class="nav-link <?= ($this->uri->segment(2) == "kategori_barang") ? "active" : ""; ?>">
+								<i class="nav-icon fas fa-tags"></i>
+								<p>
+									Kategori Barang
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a href="<?= site_url('stock_keluar'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_keluar") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-cart-arrow-down"></i>
 								<p>
