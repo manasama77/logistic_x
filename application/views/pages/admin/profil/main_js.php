@@ -1,15 +1,13 @@
 <script>
 	$(document).ready(function() {
-		$('#form_setting').on('submit', function(e) {
+		$('#form_update_informasi').on('submit', function(e) {
 			e.preventDefault();
 
 			$.ajax({
 				url: '<?= site_url('setting_update'); ?>',
 				method: 'post',
 				dataType: 'json',
-				data: {
-					name: $('#name').val()
-				},
+				data: $('#form_update_informasi').serialize(),
 				beforeSend: function() {
 					$.blockUI();
 				}
@@ -36,9 +34,10 @@
 						icon: 'success',
 						title: 'Success...',
 						text: 'Update Success',
-						showConfirmButton: true,
+						showConfirmButton: false,
 						timer: 2000,
 						timerProgressBar: true,
+						toast: true,
 					}).then((res) => {
 						window.location.reload();
 					});
@@ -48,7 +47,6 @@
 
 		$('#form_reset_password').on('submit', function(e) {
 			e.preventDefault();
-
 			checkCurrentPassword();
 		});
 
@@ -126,10 +124,7 @@
 				text: 'New Password & Verify Password must be same!',
 			});
 		} else {
-			sendOTP().done(function(e) {
-				console.log(e);
-				$('#modal_otp').modal('show');
-			});
+			updatePassword()
 		}
 	}
 
@@ -169,9 +164,10 @@
 					icon: 'success',
 					title: 'Success...',
 					text: 'Update Success',
-					showConfirmButton: true,
+					showConfirmButton: false,
 					timer: 2000,
 					timerProgressBar: true,
+					toast: true,
 				}).then((res) => {
 					window.location.reload();
 				});

@@ -17,7 +17,6 @@ class LoginController extends CI_Controller
 		$this->load->library('L_genuine_mail', null, 'genuine_mail');
 		$this->load->helper(['cookie', 'string', 'otp_helper', 'domain_helper']);
 		$this->load->model('M_admin');
-		$this->load->model('M_log_send_email_admin');
 
 		$this->datetime   = date('Y-m-d H:i:s');
 		$this->from       = EMAIL_ADMIN;
@@ -109,7 +108,11 @@ class LoginController extends CI_Controller
 			SESI . 'is_active',
 		];
 		$this->session->unset_userdata($data);
-		$this->session->set_flashdata('logout', 'Logout Berhasil');
+		if ($this->session->flashdata('message')) {
+			$this->session->keep_flashdata('message');
+		} else {
+			$this->session->set_flashdata('message', 'Logout Berhasil');
+		}
 		redirect('login');
 	}
 

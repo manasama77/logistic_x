@@ -21,13 +21,15 @@ class L_admin
 		if ($cookies) {
 			$check_cookies = $this->check_cookies($cookies);
 			if ($check_cookies === FALSE) {
-				return $this->reject();
+				$this->reject();
+				exit;
 			}
 		}
 
 		$check_session = $this->check_session();
 		if ($check_session === FALSE) {
-			return $this->reject();
+			$this->reject();
+			exit;
 		}
 
 		$this->reset_session();

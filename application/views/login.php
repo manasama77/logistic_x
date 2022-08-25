@@ -27,6 +27,15 @@
 			<div class="card-body">
 				<p class="login-box-msg">Sign in to start your session</p>
 
+				<?php if ($this->session->flashdata('message')) { ?>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<strong><?= $this->session->flashdata('message'); ?></strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<?php } ?>
+
 				<form action="<?= site_url('auth'); ?>" method="post">
 					<div class="input-group mb-3">
 						<input type="username" class="form-control lowercase <?= $this->session->flashdata('username_state'); ?>" id="username" name="username" placeholder="Username" autocomplete="username" value="<?= $this->session->flashdata('username_value'); ?>" required>

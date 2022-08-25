@@ -10,36 +10,43 @@ class ProfileController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('L_admin', null, 'template');
-
 		$this->current_datetime = date('Y-m-d H: i: s');
 	}
 
 	public function index()
 	{
+		$where = ['id' => $this->session->userdata(SESI . 'id')];
+		$arr = $this->M_core->get('admins', 'username, email, name, division_id, phone', $where);
+
 		$data = [
-			'title'      => APP_NAME . ' | Profile',
-			'content'    => 'profile/main',
-			'vitamin_js' => 'profile/main_js',
+			'title'      => APP_NAME . ' | Profil',
+			'content'    => 'profil/main',
+			'vitamin_js' => 'profil/main_js',
+			'arr'        => $arr,
 		];
 
-		$where = [
-			'email' => $this->session->userdata(SESI . 'email')
-		];
-		$data['arr'] = $this->M_core->get('admin', 'email, name', $where);
+
 		$this->template->render($data);
 	}
 
 	public function setting_update()
 	{
 		$code  = 500;
-		$email = $this->session->userdata(SESI . 'email');
+		$id    = $this->session->userdata(SESI . 'id');
 		$name  = $this->input->post('name');
+		$email = $this->input->post('email');
+		$phone = $this->input->post('phone');
 
-		$data  = ['name'  => $name];
-		$where = ['email' => $email];
-		$exec  = $this->M_core->update('admin', $data, $where);
+		$data  = [
+			'name'  => $name,
+			'email' => $email,
+			'phone' => $phone,
+		];
+		$where = ['id' => $id];
+		$exec  = $this->M_core->update('admins', $data, $where);
 
 		$this->session->set_userdata(SESI . 'name', $name);
+		$this->session->set_userdata(SESI . 'email', $email);
 
 		if ($exec) {
 			$code = 200;
@@ -50,16 +57,16 @@ class ProfileController extends CI_Controller
 
 	public function check_current_password()
 	{
-		$email            = $this->session->userdata(SESI . 'email');
+		$id               = $this->session->userdata(SESI . 'id');
 		$current_password = $this->input->post('current_password');
 		$code             = 500;
 
 		$where = [
-			'email'      => $email,
+			'id'         => $id,
 			'is_active'  => 'yes',
 			'deleted_at' => null,
 		];
-		$exec = $this->M_core->get('admin', 'password', $where);
+		$exec = $this->M_core->get('admins', 'password', $where);
 
 		if ($exec) {
 			if ($exec->num_rows() == 1) {
@@ -77,7 +84,7 @@ class ProfileController extends CI_Controller
 	public function update_password()
 	{
 		$code         = 500;
-		$email        = $this->session->userdata(SESI . 'email');
+		$id           = $this->session->userdata(SESI . 'id');
 		$new_password = $this->input->post('new_password');
 
 		$data = [
@@ -85,9 +92,9 @@ class ProfileController extends CI_Controller
 			'updated_at' => $this->current_datetime
 		];
 
-		$where = ['email' => $email];
+		$where = ['id' => $id];
 
-		$exec = $this->M_core->update('admin', $data, $where);
+		$exec = $this->M_core->update('admins', $data, $where);
 
 		if ($exec) {
 			$code = 200;

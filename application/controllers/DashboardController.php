@@ -14,7 +14,6 @@ class DashboardController extends CI_Controller
 		parent::__construct();
 		$this->load->library('L_admin', null, 'template');
 		$this->load->model('M_dashboard');
-		$this->load->model('M_member');
 		$this->load->helper('floating_helper');
 
 		$this->date       = date('Y-m-d');
