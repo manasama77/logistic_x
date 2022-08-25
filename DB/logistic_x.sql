@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 26/08/2022 02:21:10
+ Date: 26/08/2022 04:17:24
 */
 
 SET NAMES utf8mb4;
@@ -97,6 +97,25 @@ CREATE TABLE `x_locations`  (
 -- Records of x_locations
 -- ----------------------------
 INSERT INTO `x_locations` VALUES (1, 'Gudang 1', '#1');
+
+-- ----------------------------
+-- Table structure for x_suppliers
+-- ----------------------------
+DROP TABLE IF EXISTS `x_suppliers`;
+CREATE TABLE `x_suppliers`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `is_active` enum('Aktif','Tidak Aktif') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of x_suppliers
+-- ----------------------------
+INSERT INTO `x_suppliers` VALUES (1, '001', 'Supplier 1', '08123456789', 'supplier1@gmail.com', 'Aktif');
 
 -- ----------------------------
 -- Table structure for x_units

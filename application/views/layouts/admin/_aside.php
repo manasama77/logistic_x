@@ -98,7 +98,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('master_supplier'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_supplier") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_barang/master_supplier'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_supplier") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-industry"></i>
 								<p>
 									Master Supplier
