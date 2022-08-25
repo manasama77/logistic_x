@@ -11,11 +11,18 @@ $route['logout'] = 'LoginController/logout';
 
 $route['dashboard'] = 'DashboardController/index';
 
+
 $route['profile']                = 'ProfileController/index';
 $route['setting_update']         = 'ProfileController/setting_update';
 $route['check_current_password'] = 'ProfileController/check_current_password';
 $route['update_password']        = 'ProfileController/update_password';
 $route['reset_password']         = 'ProfileController/reset_password';
+
+
+$route['management_barang/master_lokasi']               = 'MasterLokasiController/index';
+$route['management_barang/master_lokasi/store']         = 'MasterLokasiController/store';
+$route['management_barang/master_lokasi/destroy']       = 'MasterLokasiController/destroy';
+$route['management_barang/master_lokasi/update/(:num)'] = 'MasterLokasiController/update/$1';
 
 
 $route['management_pengguna/master_divisi']               = 'MasterDivisiController/index';

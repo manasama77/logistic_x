@@ -32,22 +32,6 @@
 						</p>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="<?= site_url('master_lokasi'); ?>" class="nav-link <?= ($this->uri->segment(1) == "master_lokasi") ? "active" : ""; ?>">
-						<i class="nav-icon fas fa-warehouse"></i>
-						<p>
-							Master Lokasi
-						</p>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="<?= site_url('master_supplier'); ?>" class="nav-link <?= ($this->uri->segment(1) == "master_supplier") ? "active" : ""; ?>">
-						<i class="nav-icon fas fa-industry"></i>
-						<p>
-							Master Supplier
-						</p>
-					</a>
-				</li>
 				<li class="nav-item <?= ($this->uri->segment(1) == "management_barang") ? "menu-is-opening menu-open" : ""; ?>">
 					<a href="#" class="nav-link <?= ($this->uri->segment(1) == "management_barang") ? "active" : ""; ?>">
 						<i class="nav-icon fas fa-dolly-flatbed"></i>
@@ -58,7 +42,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('master_barang'); ?>" class="nav-link <?= ($this->uri->segment(1) == "master_barang") ? "active" : ""; ?>">
+							<a href="<?= site_url('master_barang'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_barang") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-boxes"></i>
 								<p>
 									Master Barang
@@ -66,7 +50,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('master_satuan'); ?>" class="nav-link <?= ($this->uri->segment(1) == "master_satuan") ? "active" : ""; ?>">
+							<a href="<?= site_url('master_satuan'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_satuan") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-weight"></i>
 								<p>
 									Satuan Barang
@@ -74,7 +58,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_keluar'); ?>" class="nav-link <?= ($this->uri->segment(1) == "stock_keluar") ? "active" : ""; ?>">
+							<a href="<?= site_url('stock_keluar'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_keluar") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-cart-arrow-down"></i>
 								<p>
 									Stock Keluar
@@ -82,7 +66,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_masuk'); ?>" class="nav-link <?= ($this->uri->segment(1) == "stock_masuk") ? "active" : ""; ?>">
+							<a href="<?= site_url('stock_masuk'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_masuk") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-cart-plus"></i>
 								<p>
 									Stock Masuk
@@ -90,10 +74,26 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_opname'); ?>" class="nav-link <?= ($this->uri->segment(1) == "stock_opname") ? "active" : ""; ?>">
+							<a href="<?= site_url('stock_opname'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_opname") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-tasks"></i>
 								<p>
 									Stock Opname
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('management_barang/master_lokasi'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_lokasi") ? "active" : ""; ?>">
+								<i class="nav-icon fas fa-warehouse"></i>
+								<p>
+									Master Lokasi
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('master_supplier'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_supplier") ? "active" : ""; ?>">
+								<i class="nav-icon fas fa-industry"></i>
+								<p>
+									Master Supplier
 								</p>
 							</a>
 						</li>
