@@ -19,15 +19,20 @@ $route['update_password']        = 'ProfileController/update_password';
 $route['reset_password']         = 'ProfileController/reset_password';
 
 
-$route['management_barang/master_lokasi']               = 'MasterLokasiController/index';
-$route['management_barang/master_lokasi/store']         = 'MasterLokasiController/store';
-$route['management_barang/master_lokasi/destroy']       = 'MasterLokasiController/destroy';
-$route['management_barang/master_lokasi/update/(:num)'] = 'MasterLokasiController/update/$1';
+$route['management_barang/satuan_barang']               = 'SatuanBarangController/index';
+$route['management_barang/satuan_barang/store']         = 'SatuanBarangController/store';
+$route['management_barang/satuan_barang/destroy']       = 'SatuanBarangController/destroy';
+$route['management_barang/satuan_barang/update/(:num)'] = 'SatuanBarangController/update/$1';
 
 $route['management_barang/kategori_barang']               = 'KategoriBarangController/index';
 $route['management_barang/kategori_barang/store']         = 'KategoriBarangController/store';
 $route['management_barang/kategori_barang/destroy']       = 'KategoriBarangController/destroy';
 $route['management_barang/kategori_barang/update/(:num)'] = 'KategoriBarangController/update/$1';
+
+$route['management_barang/master_lokasi']               = 'MasterLokasiController/index';
+$route['management_barang/master_lokasi/store']         = 'MasterLokasiController/store';
+$route['management_barang/master_lokasi/destroy']       = 'MasterLokasiController/destroy';
+$route['management_barang/master_lokasi/update/(:num)'] = 'MasterLokasiController/update/$1';
 
 
 $route['management_pengguna/master_divisi']               = 'MasterDivisiController/index';

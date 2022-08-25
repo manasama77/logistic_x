@@ -50,7 +50,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('master_satuan'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_satuan") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_barang/satuan_barang'); ?>" class="nav-link <?= ($this->uri->segment(2) == "satuan_barang") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-weight"></i>
 								<p>
 									Satuan Barang
