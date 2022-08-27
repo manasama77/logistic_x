@@ -42,7 +42,7 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('master_barang'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_barang") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_barang/master_barang'); ?>" class="nav-link <?= ($this->uri->segment(2) == "master_barang") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-boxes"></i>
 								<p>
 									Master Barang

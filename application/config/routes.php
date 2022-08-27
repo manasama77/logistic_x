@@ -23,6 +23,15 @@ $route['reset_password']         = 'ProfileController/reset_password';
 /* END PROFILE */
 
 /* *********************************************************************************** START MANAGEMENT BARANG */
+/// START MASTER BARANG
+$route['management_barang/master_barang']               = 'MasterBarangController/index';
+$route['management_barang/master_barang/add']           = 'MasterBarangController/add';
+$route['management_barang/master_barang/store']         = 'MasterBarangController/store';
+$route['management_barang/master_barang/edit/(:num)'] = 'MasterBarangController/edit/$1';
+$route['management_barang/master_barang/update/(:num)'] = 'MasterBarangController/update/$1';
+$route['management_barang/master_barang/destroy']       = 'MasterBarangController/destroy';
+/// END MASTER BARANG
+
 /// START SATUAN BARANG
 $route['management_barang/satuan_barang']               = 'SatuanBarangController/index';
 $route['management_barang/satuan_barang/store']         = 'SatuanBarangController/store';
