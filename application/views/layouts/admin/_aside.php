@@ -74,7 +74,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_masuk'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_masuk") ? "active" : ""; ?>">
+							<a href="<?= site_url('management_barang/stock_masuk'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_masuk") ? "active" : ""; ?>">
 								<i class="nav-icon fas fa-cart-plus"></i>
 								<p>
 									Stock Masuk

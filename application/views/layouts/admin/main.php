@@ -14,6 +14,11 @@ if (isset($vitamin_css)) {
 	.table {
 		width: 100% !important;
 	}
+
+	.card-title {
+		font-weight: bold !important;
+		font-size: 1rem !important;
+	}
 </style>
 
 <body class="control-sidebar-slide-open layout-fixed sidebar-mini-sm text-sm" style="height: auto;">
@@ -54,11 +59,17 @@ if (isset($vitamin_css)) {
 	<!-- overlayScrollbars -->
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
+	<!-- momentJS -->
+	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/moment/moment.min.js"></script>
+	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/moment/moment-with-locales.js"></script>
+	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/moment/locale/id.js"></script>
+
 	<!-- PAGE PLUGINS -->
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/raphael/raphael.min.js"></script>
 	<script src="<?= base_url(); ?>public/js/jquery.blockUI.js"></script>
 	<script src="<?= base_url(); ?>public/js/sweetalert2.min.js"></script>
+	<script src="<?= base_url(); ?>public/plugin/datetime-picker/jquery.datetimepicker.full.min.js"></script>
 
 
 	<!-- DataTables  & Plugins -->
@@ -74,6 +85,9 @@ if (isset($vitamin_css)) {
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script> -->
 </body>
 
 </html>

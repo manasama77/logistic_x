@@ -27,7 +27,7 @@ $route['reset_password']         = 'ProfileController/reset_password';
 $route['management_barang/master_barang']               = 'MasterBarangController/index';
 $route['management_barang/master_barang/add']           = 'MasterBarangController/add';
 $route['management_barang/master_barang/store']         = 'MasterBarangController/store';
-$route['management_barang/master_barang/edit/(:num)'] = 'MasterBarangController/edit/$1';
+$route['management_barang/master_barang/edit/(:num)']   = 'MasterBarangController/edit/$1';
 $route['management_barang/master_barang/update/(:num)'] = 'MasterBarangController/update/$1';
 $route['management_barang/master_barang/destroy']       = 'MasterBarangController/destroy';
 /// END MASTER BARANG
@@ -45,6 +45,15 @@ $route['management_barang/kategori_barang/store']         = 'KategoriBarangContr
 $route['management_barang/kategori_barang/destroy']       = 'KategoriBarangController/destroy';
 $route['management_barang/kategori_barang/update/(:num)'] = 'KategoriBarangController/update/$1';
 /// END KATEGORI BARANG
+
+/// START STOCK MASUK
+$route['management_barang/stock_masuk']               = 'StockMasukController/index';
+$route['management_barang/stock_masuk/add']           = 'StockMasukController/add';
+$route['management_barang/stock_masuk/store']         = 'StockMasukController/store';
+$route['management_barang/stock_masuk/edit/(:num)']   = 'StockMasukController/edit/$1';
+$route['management_barang/stock_masuk/update/(:num)'] = 'StockMasukController/update/$1';
+$route['management_barang/stock_masuk/destroy']       = 'StockMasukController/destroy';
+/// END STOCK MASUK
 
 /// START MASTER LOKASI
 $route['management_barang/master_lokasi']               = 'MasterLokasiController/index';
