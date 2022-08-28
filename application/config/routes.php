@@ -47,12 +47,13 @@ $route['management_barang/kategori_barang/update/(:num)'] = 'KategoriBarangContr
 /// END KATEGORI BARANG
 
 /// START STOCK MASUK
-$route['management_barang/stock_masuk']               = 'StockMasukController/index';
-$route['management_barang/stock_masuk/add']           = 'StockMasukController/add';
-$route['management_barang/stock_masuk/store']         = 'StockMasukController/store';
-$route['management_barang/stock_masuk/edit/(:num)']   = 'StockMasukController/edit/$1';
-$route['management_barang/stock_masuk/update/(:num)'] = 'StockMasukController/update/$1';
-$route['management_barang/stock_masuk/destroy']       = 'StockMasukController/destroy';
+$route['management_barang/stock_masuk']                      = 'StockMasukController/index';
+$route['management_barang/stock_masuk/add']                  = 'StockMasukController/add';
+$route['management_barang/stock_masuk/store']                = 'StockMasukController/store';
+$route['management_barang/stock_masuk/edit/(:num)']          = 'StockMasukController/edit/$1';
+$route['management_barang/stock_masuk/get_list_item/(:num)'] = 'StockMasukController/get_list_item/$1';
+$route['management_barang/stock_masuk/update/(:num)']        = 'StockMasukController/update/$1';
+$route['management_barang/stock_masuk/destroy']              = 'StockMasukController/destroy';
 /// END STOCK MASUK
 
 /// START MASTER LOKASI

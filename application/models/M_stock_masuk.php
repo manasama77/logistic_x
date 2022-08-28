@@ -128,6 +128,26 @@ class M_stock_masuk extends CI_Model
         $this->db->where('code_date', date('Y-m-d'));
         return $this->db->update('stock_in_request_sequences');
     }
+
+    public function get_item($where)
+    {
+        $this->db->select([
+            'stock_in_request_items.item_id',
+            'items.code as item_code',
+            'items.name as item_name',
+            'stock_in_request_items.qty_request',
+            'stock_in_request_items.qty_receive',
+            'stock_in_request_items.datetime_receive',
+            'stock_in_request_items.description',
+            'units.name as unit_name',
+        ]);
+        $this->db->join('items', 'items.id = stock_in_request_items.item_id', 'left');
+        $this->db->join('units', 'units.id = items.unit_id', 'left');
+        $this->db->where($where);
+        $stock_in_request_items = $this->db->get('stock_in_request_items');
+
+        return $stock_in_request_items;
+    }
 }
                         
 /* End of file M_stock_masuk.php */

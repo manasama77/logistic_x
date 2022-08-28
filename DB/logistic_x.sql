@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 28/08/2022 01:13:56
+ Date: 28/08/2022 12:41:21
 */
 
 SET NAMES utf8mb4;
@@ -109,7 +109,7 @@ CREATE TABLE `x_items`  (
 -- ----------------------------
 -- Records of x_items
 -- ----------------------------
-INSERT INTO `x_items` VALUES (1, '123456789', 'test', 'test', 0, '1a2878e4e94512d587ba6a29b9ee684d.jpg', 1, 3, 1, 1, '2022-08-28 00:38:58', '2022-08-28 01:05:48', '2022-08-28 01:11:55', 1, 1, 1);
+INSERT INTO `x_items` VALUES (1, '123456789', 'test', 'test', 0, '1a2878e4e94512d587ba6a29b9ee684d.jpg', 1, 3, 1, 1, '2022-08-28 00:38:58', '2022-08-28 01:05:48', NULL, 1, 1, NULL);
 INSERT INTO `x_items` VALUES (2, '1234567890', 'test', 'test', 0, '', 2, 1, 1, 1, '2022-08-28 01:06:18', '2022-08-28 01:06:32', NULL, 1, 1, NULL);
 
 -- ----------------------------
@@ -127,6 +127,86 @@ CREATE TABLE `x_locations`  (
 -- Records of x_locations
 -- ----------------------------
 INSERT INTO `x_locations` VALUES (1, 'Gudang 1', '#1');
+
+-- ----------------------------
+-- Table structure for x_stock_in_request_items
+-- ----------------------------
+DROP TABLE IF EXISTS `x_stock_in_request_items`;
+CREATE TABLE `x_stock_in_request_items`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `stock_in_request_id` bigint UNSIGNED NOT NULL,
+  `item_id` bigint UNSIGNED NOT NULL,
+  `qty_request` bigint UNSIGNED NOT NULL,
+  `qty_receive` bigint UNSIGNED NOT NULL,
+  `datetime_receive` datetime NULL DEFAULT NULL,
+  `state_item` enum('Menunggu','Terima','Tolak') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED NULL DEFAULT NULL,
+  `deleted_by` bigint UNSIGNED NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of x_stock_in_request_items
+-- ----------------------------
+INSERT INTO `x_stock_in_request_items` VALUES (1, 3, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 09:49:20', '2022-08-28 09:49:20', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (2, 4, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (3, 4, 2, 50, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (4, 5, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:08', '2022-08-28 10:11:08', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (5, 6, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (6, 6, 2, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (7, 7, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (8, 7, 2, 1000, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
+
+-- ----------------------------
+-- Table structure for x_stock_in_request_sequences
+-- ----------------------------
+DROP TABLE IF EXISTS `x_stock_in_request_sequences`;
+CREATE TABLE `x_stock_in_request_sequences`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code_date` date NOT NULL,
+  `seq` bigint UNSIGNED NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of x_stock_in_request_sequences
+-- ----------------------------
+INSERT INTO `x_stock_in_request_sequences` VALUES (1, '2022-08-28', 3);
+
+-- ----------------------------
+-- Table structure for x_stock_in_requests
+-- ----------------------------
+DROP TABLE IF EXISTS `x_stock_in_requests`;
+CREATE TABLE `x_stock_in_requests`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `request_datetime` datetime NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `no_po` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `no_do` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `state` enum('Menunggu','Proses','Tolak','Partial','Selesai') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  `created_by` bigint UNSIGNED NOT NULL,
+  `updated_by` bigint UNSIGNED NULL DEFAULT NULL,
+  `deleted_by` bigint UNSIGNED NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of x_stock_in_requests
+-- ----------------------------
+INSERT INTO `x_stock_in_requests` VALUES (3, '2022-08-28 09:49:00', 'IN-20220828-0001', '123', '', 'Proses', '', '2022-08-28 09:49:20', '2022-08-28 09:49:20', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (4, '2022-08-28 10:02:00', 'IN-20220828-0002', '456', '', 'Tolak', '', '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (5, '2022-08-28 10:10:00', 'IN-20220828-0003', '123456', '', 'Partial', '', '2022-08-28 10:11:08', '2022-08-28 10:11:08', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (6, '2022-08-28 10:11:00', '123', '', '', 'Selesai', '', '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (7, '2022-08-28 10:11:00', '1234', '', '', 'Menunggu', '', '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
 
 -- ----------------------------
 -- Table structure for x_suppliers

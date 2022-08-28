@@ -108,10 +108,17 @@
 									?>
 											<tr>
 												<td class="text-center">
-													<a href="<?= base_url('management_barang/stock_masuk/edit/' . $key['id']); ?>" class="btn btn-info btn-sm" title="Edit">
+													<?php
+													$rules_edit    = ["Selesai", "Partial", "Tolak"];
+													$disabled_edit = (in_array($key['state'], $rules_edit) === true) ? "disabled" : null;
+
+													$rules_delete    = ["Selesai", "Partial"];
+													$disabled_delete = (in_array($key['state'], $rules_delete) === true) ? "disabled" : null;
+													?>
+													<a href="<?= base_url('management_barang/stock_masuk/edit/' . $key['id']); ?>" class="btn btn-info btn-sm <?= $disabled_edit; ?>" title="Edit">
 														<i class="fas fa-pencil-alt"></i>
 													</a>
-													<button type="button" class="btn btn-danger btn-sm" title="Delete" name="btn_delete_<?= $key['id']; ?>" onclick="deleteData('<?= $key['id']; ?>', '<?= $key['code']; ?>')">
+													<button type="button" class="btn btn-danger btn-sm" title="Delete" name="btn_delete_<?= $key['id']; ?>" onclick="deleteData('<?= $key['id']; ?>', '<?= $key['code']; ?>')" <?= $disabled_delete; ?>>
 														<i class="fas fa-trash"></i>
 													</button>
 												</td>
