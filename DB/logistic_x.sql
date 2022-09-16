@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 28/08/2022 12:41:21
+ Date: 16/09/2022 21:27:16
 */
 
 SET NAMES utf8mb4;
@@ -47,7 +47,7 @@ CREATE TABLE `x_admins`  (
 -- ----------------------------
 -- Records of x_admins
 -- ----------------------------
-INSERT INTO `x_admins` VALUES (1, 'admin', '$2y$10$3VFXbyD2VJbmDEWppM1dd.gBm8fJBnBn7vn1W46C2Ze1tZ7poUCDu', 'adam.pm77@gmail.com', 'Adam Ganteng', 'Admin', '082114578976', 1, 'yes', NULL, NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', '2021-06-06 00:35:15', '2022-08-27 04:36:16', NULL, NULL, 1, NULL);
+INSERT INTO `x_admins` VALUES (1, 'admin', '$2y$10$3VFXbyD2VJbmDEWppM1dd.gBm8fJBnBn7vn1W46C2Ze1tZ7poUCDu', 'adam.pm77@gmail.com', 'Adam Ganteng', 'Admin', '082114578976', 1, 'yes', NULL, NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', '2021-06-06 00:35:15', '2022-09-14 21:19:56', NULL, NULL, 1, NULL);
 INSERT INTO `x_admins` VALUES (2, 'Test', '$2y$10$Drft/stRJ7/bUYkf5Fu1Vevg/ST3dCLTXFSlzYFNo7znVXsNwTRqO', 'test@gmail.com', 'test', 'Staff', '082114578976', 1, 'yes', NULL, NULL, NULL, NULL, '2022-08-26 01:32:49', '2022-08-26 01:40:50', '2022-08-26 01:40:50', 1, 1, 1);
 INSERT INTO `x_admins` VALUES (3, 'test', '$2y$10$N7f7bHU9LLF60nYeSZtdnuOwcI7y6pV49T1cNBts8DTj3zLORT3iq', 'test@gmail.com', 'test', 'Staff', 'test', 1, 'no', NULL, NULL, NULL, NULL, '2022-08-26 01:41:57', '2022-08-26 01:49:58', NULL, 1, 1, NULL);
 
@@ -109,7 +109,7 @@ CREATE TABLE `x_items`  (
 -- ----------------------------
 -- Records of x_items
 -- ----------------------------
-INSERT INTO `x_items` VALUES (1, '123456789', 'test', 'test', 0, '1a2878e4e94512d587ba6a29b9ee684d.jpg', 1, 3, 1, 1, '2022-08-28 00:38:58', '2022-08-28 01:05:48', NULL, 1, 1, NULL);
+INSERT INTO `x_items` VALUES (1, '123456789', 'Lorem ipsum dolor sit amet.', 'test', 0, '1a2878e4e94512d587ba6a29b9ee684d.jpg', 1, 3, 1, 1, '2022-08-28 00:38:58', '2022-08-28 01:05:48', NULL, 1, 1, NULL);
 INSERT INTO `x_items` VALUES (2, '1234567890', 'test', 'test', 0, '', 2, 1, 1, 1, '2022-08-28 01:06:18', '2022-08-28 01:06:32', NULL, 1, 1, NULL);
 
 -- ----------------------------
@@ -148,19 +148,13 @@ CREATE TABLE `x_stock_in_request_items`  (
   `updated_by` bigint UNSIGNED NULL DEFAULT NULL,
   `deleted_by` bigint UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of x_stock_in_request_items
 -- ----------------------------
-INSERT INTO `x_stock_in_request_items` VALUES (1, 3, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 09:49:20', '2022-08-28 09:49:20', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (2, 4, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (3, 4, 2, 50, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (4, 5, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:08', '2022-08-28 10:11:08', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (5, 6, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (6, 6, 2, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (7, 7, 1, 100, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_request_items` VALUES (8, 7, 2, 1000, 0, NULL, 'Menunggu', NULL, '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (3, 1, 1, 101, 101, '2022-09-14 02:30:00', 'Terima', NULL, '2022-09-13 20:35:13', '2022-09-13 20:35:13', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_request_items` VALUES (7, 2, 1, 500, 0, NULL, 'Menunggu', NULL, '2022-09-14 21:22:37', '2022-09-14 21:22:37', NULL, 1, 1, NULL);
 
 -- ----------------------------
 -- Table structure for x_stock_in_request_sequences
@@ -171,12 +165,13 @@ CREATE TABLE `x_stock_in_request_sequences`  (
   `code_date` date NOT NULL,
   `seq` bigint UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of x_stock_in_request_sequences
 -- ----------------------------
-INSERT INTO `x_stock_in_request_sequences` VALUES (1, '2022-08-28', 3);
+INSERT INTO `x_stock_in_request_sequences` VALUES (1, '2022-09-12', 1);
+INSERT INTO `x_stock_in_request_sequences` VALUES (2, '2022-09-14', 1);
 
 -- ----------------------------
 -- Table structure for x_stock_in_requests
@@ -197,16 +192,13 @@ CREATE TABLE `x_stock_in_requests`  (
   `updated_by` bigint UNSIGNED NULL DEFAULT NULL,
   `deleted_by` bigint UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of x_stock_in_requests
 -- ----------------------------
-INSERT INTO `x_stock_in_requests` VALUES (3, '2022-08-28 09:49:00', 'IN-20220828-0001', '123', '', 'Proses', '', '2022-08-28 09:49:20', '2022-08-28 09:49:20', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_requests` VALUES (4, '2022-08-28 10:02:00', 'IN-20220828-0002', '456', '', 'Tolak', '', '2022-08-28 10:02:30', '2022-08-28 10:02:30', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_requests` VALUES (5, '2022-08-28 10:10:00', 'IN-20220828-0003', '123456', '', 'Partial', '', '2022-08-28 10:11:08', '2022-08-28 10:11:08', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_requests` VALUES (6, '2022-08-28 10:11:00', '123', '', '', 'Selesai', '', '2022-08-28 10:11:28', '2022-08-28 10:11:28', NULL, 1, 1, NULL);
-INSERT INTO `x_stock_in_requests` VALUES (7, '2022-08-28 10:11:00', '1234', '', '', 'Menunggu', '', '2022-08-28 10:11:47', '2022-08-28 10:11:47', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (1, '2022-09-12 15:42:00', 'IN-20220912-0001', '123', '456', 'Selesai', 'test 1', '2022-09-12 15:42:45', '2022-09-13 20:35:13', NULL, 1, 1, NULL);
+INSERT INTO `x_stock_in_requests` VALUES (2, '2022-09-14 21:20:00', 'IN-20220914-0001', NULL, NULL, 'Menunggu', 'test', '2022-09-14 21:20:51', '2022-09-14 21:22:37', NULL, 1, 1, NULL);
 
 -- ----------------------------
 -- Table structure for x_suppliers
