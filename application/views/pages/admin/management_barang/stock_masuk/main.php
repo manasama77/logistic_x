@@ -85,13 +85,14 @@
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="table table-bordered table-striped" id="table_data" style="min-width: 1200px;">
+							<table class="table table-bordered table-striped" id="table_data" style="min-width: 1500px;">
 								<thead>
 									<tr>
-										<th class="text-center" style="max-width: 80px;">
+										<th class="text-center" style="min-width: 80px;">
 											Aksi
 										</th>
 										<th>Tanggal & Jam Request</th>
+										<th style="min-width: 100px;">Kode Request</th>
 										<th>No PO</th>
 										<th>No DO</th>
 										<th>Status</th>
@@ -109,10 +110,10 @@
 											<tr>
 												<td class="text-center">
 													<?php
-													$rules_edit    = ["Selesai", "Partial", "Tolak"];
+													$rules_edit    = ["Selesai", "Partial", "Tolak", "Proses"];
 													$disabled_edit = (in_array($key['state'], $rules_edit) === true) ? "disabled" : null;
 
-													$rules_delete    = ["Selesai", "Partial"];
+													$rules_delete    = ["Selesai", "Partial", "Tolak", "Proses"];
 													$disabled_delete = (in_array($key['state'], $rules_delete) === true) ? "disabled" : null;
 													?>
 													<a href="<?= base_url('management_barang/stock_masuk/edit/' . $key['id']); ?>" class="btn btn-info btn-sm <?= $disabled_edit; ?>" title="Edit">
@@ -121,8 +122,12 @@
 													<button type="button" class="btn btn-danger btn-sm" title="Delete" name="btn_delete_<?= $key['id']; ?>" onclick="deleteData('<?= $key['id']; ?>', '<?= $key['code']; ?>')" <?= $disabled_delete; ?>>
 														<i class="fas fa-trash"></i>
 													</button>
+													<button type="button" class="btn btn-success btn-sm" title="Detail" name="btn_detail_<?= $key['id']; ?>" onclick="viewDetail('<?= $key['id']; ?>')">
+														<i class="fas fa-eye"></i>
+													</button>
 												</td>
 												<td><?= $key['request_datetime_formated']; ?></td>
+												<td><?= $key['code']; ?></td>
 												<td><?= $key['no_po']; ?></td>
 												<td><?= $key['no_do']; ?></td>
 												<td><?= $key['state']; ?></td>
@@ -145,3 +150,96 @@
 		</div>
 	</div>
 </section>
+
+<form id="form_detail">
+	<div class="modal fade" id="modal_detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Detail</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h3>Info Request</h3>
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td style="width: 180px;">Tanggal & Jam Request</td>
+									<td style="width: 10px;">:</td>
+									<td id="v_request_datetime"></td>
+								</tr>
+								<tr>
+									<td>Kode Request</td>
+									<td>:</td>
+									<td id="v_code"></td>
+								</tr>
+								<tr>
+									<td>Status</td>
+									<td>:</td>
+									<td>
+										<select class="form-control col-md-4" id="v_state" name="state">
+											<option value="Menunggu">Menunggu</option>
+											<option value="Proses">Proses</option>
+											<option value="Tolak">Tolak</option>
+											<option value="Partial">Partial</option>
+											<option value="Selesai">Selesai</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Nomor PO</td>
+									<td>:</td>
+									<td>
+										<input type="text" class="form-control col-md-4" id="v_no_po" name="no_po" />
+									</td>
+								</tr>
+								<tr>
+									<td>Nomor DO</td>
+									<td>:</td>
+									<td>
+										<input type="text" class="form-control col-md-4" id="v_no_do" name="no_do" disabled />
+									</td>
+								</tr>
+								<tr>
+									<td>Keterangan</td>
+									<td>:</td>
+									<td id="v_description"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<hr />
+					<h3>List Barang</h3>
+					<div class="table-responsive">
+						<table class="table table-bordered table-sm">
+							<thead>
+								<tr>
+									<th>Barang</th>
+									<th>Qty Request</th>
+									<th class="text-center">Qty Diterima</th>
+									<th class="text-center">Tanggal Diterima</th>
+									<th class="text-center" style="width: 150px;">Status</th>
+								</tr>
+							</thead>
+							<tbody id="v_items">
+								<tr>
+									<td colspan="5" class="text-center">Data Kosong</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="v_id" name="id" />
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" id="btn_save">
+						<i class="fas fa-save"></i> Simpan
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

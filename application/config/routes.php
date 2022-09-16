@@ -54,6 +54,8 @@ $route['management_barang/stock_masuk/edit/(:num)']          = 'StockMasukContro
 $route['management_barang/stock_masuk/get_list_item/(:num)'] = 'StockMasukController/get_list_item/$1';
 $route['management_barang/stock_masuk/update/(:num)']        = 'StockMasukController/update/$1';
 $route['management_barang/stock_masuk/destroy']              = 'StockMasukController/destroy';
+$route['management_barang/stock_masuk/show']                 = 'StockMasukController/show';
+$route['management_barang/stock_masuk/update_detail']        = 'StockMasukController/update_detail';
 /// END STOCK MASUK
 
 /// START MASTER LOKASI

@@ -4,6 +4,10 @@
 	let listItem = []
 
 	$(document).ready(function() {
+		$('#item_id').select2({
+			allowClear: true
+		})
+
 		autoGenerateCode.onchange = evt => {
 			if (autoGenerateCode.checked) {
 				$('#code').prop('readonly', true).val('')
@@ -45,7 +49,6 @@
 			}
 
 			addItem(itemId, itemName, qty, itemSatuan)
-
 		})
 
 		$('#form').on('submit', function(e) {
@@ -136,8 +139,10 @@
 		let itemIndex = listItem.findIndex(x => x.itemId === itemId)
 
 		if (itemIndex >= 0) {
+			// Update Qty
 			listItem[itemIndex]['qty'] = listItem[itemIndex]['qty'] + qty
 		} else {
+			// Create New Data
 			listItem.push({
 				itemId,
 				itemName,
@@ -146,12 +151,13 @@
 			})
 		}
 
-		$('#item_id').val('')
+		$('#item_id').val('').change()
 		$('#qty').val('')
 		renderListItem()
 	}
 
 	function renderListItem() {
+		// adam
 		let htmlnya = ``
 
 		if (listItem.length > 0) {

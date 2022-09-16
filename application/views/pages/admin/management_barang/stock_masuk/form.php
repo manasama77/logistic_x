@@ -37,8 +37,8 @@
 									<div class="form-group">
 										<label for="request_date">Tanggal Jam Request <span class="text-danger">*</span></label>
 										<div class="input-group">
-											<input type="date" class="form-control" id="request_date" name="request_date" placeholder="Tanggal Request" required />
-											<input type="time" class="form-control" id="request_time" name="request_time" placeholder="Jam Request" required />
+											<input type="date" class="form-control" id="request_date" name="request_date" value="<?= date('Y-m-d'); ?>" placeholder="Tanggal Request" required />
+											<input type="time" class="form-control" id="request_time" name="request_time" value="<?= date('H:i'); ?>" placeholder="Jam Request" required />
 										</div>
 									</div>
 									<div class="form-group">
@@ -50,55 +50,54 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="no_po">No PO</label>
-										<input type="text" class="form-control" id="no_po" name="no_po" placeholder="No PO" />
-									</div>
-									<div class="form-group">
-										<label for="no_do">No DO</label>
-										<input type="text" class="form-control" id="no_do" name="no_do" placeholder="No DO" />
-									</div>
-									<div class="form-group">
 										<label for="description">Keterangan</label>
 										<textarea class="form-control" id="description" name="description" placeholder="Keterangan"></textarea>
 									</div>
 								</div>
-								<div class="col-sm-12 col-md-3">
-									<div class="form-group">
-										<label for="item_id">Barang</label>
-										<select class="form-control" id="item_id" name="item_id">
-											<option value=""></option>
-											<?php foreach ($item->result() as $key) { ?>
-												<option value="<?= $key->id; ?>" data-satuan="<?= $key->unit_name; ?>">(<?= $key->code; ?>) <?= $key->name; ?></option>
-											<?php } ?>
-										</select>
+								<div class="col-sm-12 col-md-8">
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<label for="item_id">Barang</label>
+												<select class="form-control" id="item_id" name="item_id" data-placeholder="Pilih Barang">
+													<option value=""></option>
+													<?php foreach ($item->result() as $key) { ?>
+														<option value="<?= $key->id; ?>" data-satuan="<?= $key->unit_name; ?>">(<?= $key->code; ?>) <?= $key->name; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="qty">Qty</label>
+												<input type="number" class="form-control" id="qty" name="qty" placeholder="Qty" min="1" />
+											</div>
+											<div class="form-group">
+												<button type="button" class="btn btn-primary btn-block" id="btn_add">
+													Update List Stock Masuk
+												</button>
+											</div>
+											<hr />
+										</div>
 									</div>
-									<div class="form-group">
-										<label for="qty">Qty</label>
-										<input type="number" class="form-control" id="qty" name="qty" placeholder="Qty" />
-									</div>
-									<div class="form-group">
-										<button type="button" class="btn btn-primary btn-block" id="btn_add">
-											<i class="fas fa-plus"></i> Tambah Barang
-										</button>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-5">
-									<div class="table-responsive">
-										<table class="table table-bordered">
-											<caption>List Stock Masuk</caption>
-											<thead class="bg-info">
-												<tr>
-													<th class="text-center"><i class="fas fa-cog"></i></th>
-													<th>Barang</th>
-													<th>Qty</th>
-												</tr>
-											</thead>
-											<tbody id="v_list">
-												<tr>
-													<td colspan="3" class="text-center">Data Kosong</td>
-												</tr>
-											</tbody>
-										</table>
+									<div class="row">
+										<div class="col">
+											<div class="table-responsive">
+												<table class="table table-bordered">
+													<caption>List Stock Masuk</caption>
+													<thead class="bg-info">
+														<tr>
+															<th class="text-center"><i class="fas fa-cog"></i></th>
+															<th>Barang</th>
+															<th>Qty</th>
+														</tr>
+													</thead>
+													<tbody id="v_list">
+														<tr>
+															<td colspan="3" class="text-center">Data Kosong</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

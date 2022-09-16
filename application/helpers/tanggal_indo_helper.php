@@ -11,6 +11,30 @@ function tanggal_indo_no_dash($tanggal)
     return $hari . " " . $bulan . " " . $tahun;
 }
 
+function tanggal_jam_indo_no_dash($tanggal)
+{
+    $tgl_obj = new DateTime($tanggal);
+    $hari    = $tgl_obj->format('d');
+    $bulan   = bulan_indo($tgl_obj->format('m'));
+    $tahun   = $tgl_obj->format('Y');
+    $jam     = $tgl_obj->format('H');
+    $menit   = $tgl_obj->format('i');
+
+    return $hari . " " . $bulan . " " . $tahun . " " . $jam . ":" . $menit;
+}
+
+function tanggal_jam_indo_no_dash_plain($tanggal)
+{
+    $tgl_obj = new DateTime($tanggal);
+    $hari    = $tgl_obj->format('d');
+    $bulan   = $tgl_obj->format('m');
+    $tahun   = $tgl_obj->format('Y');
+    $jam     = $tgl_obj->format('H');
+    $menit   = $tgl_obj->format('i');
+
+    return $hari . "-" . $bulan . "-" . $tahun . " " . $jam . ":" . $menit;
+}
+
 function full_tanggal_indo_no_dash($tanggal)
 {
     $tgl_obj   = new DateTime($tanggal);

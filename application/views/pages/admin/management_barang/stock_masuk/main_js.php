@@ -11,7 +11,7 @@
 		$("#table_data").DataTable({
 			"scrollX": true,
 			order: [
-				[1, 'desc']
+				[1, 'asc']
 			],
 			"responsive": false,
 			"lengthChange": true,
@@ -87,6 +87,51 @@
 				orderable: false
 			}]
 		}).buttons().container().appendTo('#table_data_wrapper .col-md-6:eq(0)');
+
+		$('#v_no_po').on('change', e => {
+			if ($('#v_no_po').val().length == 0) {
+				$('#v_no_do').prop('disabled', true)
+			} else {
+				$('#v_no_do').prop('disabled', false)
+			}
+		})
+
+		$('#v_no_do').on('change', e => {
+			if ($('#v_no_do').val().length == 0) {
+				$('input[name^=qty_receive]').prop('disabled', true).val(0)
+				$('input[name^=datetime_receive]').prop('disabled', true).val('')
+				$('select[name^=state_item]').prop('disabled', true).val('Menunggu')
+			} else {
+				$('input[name^=qty_receive]').prop('disabled', false)
+				$('input[name^=datetime_receive]').prop('disabled', false)
+				$('select[name^=state_item]').prop('disabled', false)
+			}
+		})
+
+		$('#v_state').on('change', e => {
+			if ($('#v_state').val() == "Selesai") {
+				$('#v_no_po').prop('disabled', true)
+				$('#v_no_do').prop('disabled', true)
+				$('#v_state').prop('disabled', true)
+				$('input[name^=qty_receive]').prop('disabled', true)
+				$('input[name^=datetime_receive]').prop('disabled', true)
+				$('select[name^=state_item]').prop('disabled', true)
+				$('#btn_save').prop('disabled', true)
+			} else {
+				$('#v_no_po').prop('disabled', false)
+				$('#v_no_do').prop('disabled', false)
+				$('#v_state').prop('disabled', false)
+				$('input[name^=qty_receive]').prop('disabled', false)
+				$('input[name^=datetime_receive]').prop('disabled', false)
+				$('select[name^=state_item]').prop('disabled', false)
+				$('#btn_save').prop('disabled', false)
+			}
+		})
+
+		$('#form_detail').on('submit', e => {
+			e.preventDefault()
+			updatedDetail()
+		})
 	});
 
 	function deleteData(id, name) {
@@ -107,7 +152,7 @@
 
 	function processDelete(id) {
 		$.ajax({
-			url: '<?= site_url('management_barang/master_barang/destroy'); ?>',
+			url: '<?= site_url('management_barang/stock_masuk/destroy'); ?>',
 			method: 'post',
 			dataType: 'json',
 			data: {
@@ -158,5 +203,127 @@
 				$(`button[name="btn_delete_${id}"]`).prop('disabled', false)
 			}
 		});
+	}
+
+	function viewDetail(id) {
+		$.ajax({
+			url: '<?= base_url('management_barang/stock_masuk/show'); ?>',
+			method: 'get',
+			dataType: 'json',
+			data: {
+				id: id
+			},
+			beforeSend: () => {
+				$.blockUI()
+			}
+		}).fail(e => {
+			console.log(e)
+		}).done(e => {
+			console.log(e)
+			$('#v_id').val(id)
+			$('#v_request_datetime').text(e.data.request_datetime_indo)
+			$('#v_code').text(e.data.code)
+			$('#v_description').text(e.data.description)
+
+			let htmlnya = `
+				<tr>
+					<td colspan="4" class="text-center">Data Kosong</td>
+				</tr>
+			`
+
+			if (e.data.items.length > 0) {
+				htmlnya = ``
+				e.data.items.forEach((v, i) => {
+					let stock_in_request_item_id = v.stock_in_request_item_id
+					let item_id = v.item_id
+					let item_code = v.item_code
+					let item_name = v.item_name
+					let qty_request = v.qty_request
+					let qty_receive = v.qty_receive
+					let datetime_receive = (v.datetime_receive) ?? ""
+					let description = v.description
+					let unit_name = v.unit_name
+					let state_item = v.state_item
+
+					htmlnya += `
+						<tr>
+							<td>
+								<input type="hidden" name="stock_in_request_item_id[]" value="${stock_in_request_item_id}" />
+								<small class="font-weight-bold">${item_code}</small><br/>${item_name}
+							</td>
+							<td>
+								<input type="hidden" name="qty_request[]" value="${qty_request}" />
+								${qty_request} ${unit_name}
+							</td>
+							<td>
+								<div class="form-row justify-content-center p-0">
+									<div class="col-md-8">
+										<div class="input-group">
+											<input type="number" class="form-control" name="qty_receive[]" value="${qty_receive}" disabled />
+											<div class="input-group-append">
+												<span class="input-group-text">${unit_name}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td class="text-center">
+								<input type="text" class="form-control" name="datetime_receive[]" value="${datetime_receive}" disabled />
+							</td>
+							<td class="text-center">
+								<select class="form-control" name="state_item[]" disabled>
+									<option (${state_item} == "Menunggu") : "selected" : null  value="Menunggu">Menunggu</option>
+									<option (${state_item} == "Terima") : "selected" : null value="Terima">Terima</option>
+									<option (${state_item} == "Tolak") : "selected" : null value="Tolak">Tolak</option>
+								</select>
+							</td>
+						</tr>
+					`
+				})
+			}
+
+			$('#v_items').html(htmlnya)
+			$('input[name^=datetime_receive]').datetimepicker({
+				format: 'd-m-Y H:i'
+			})
+			$('#v_no_po').val(e.data.no_po).change()
+			$('#v_no_do').val(e.data.no_do).change()
+			$('#v_state').val(e.data.state).change()
+			$('#modal_detail').modal('show')
+
+			$.unblockUI()
+		})
+	}
+
+	function updatedDetail() {
+		$.ajax({
+			url: `<?= base_url('management_barang/stock_masuk/update_detail'); ?>`,
+			method: 'post',
+			dataType: 'json',
+			data: $('#form_detail').serialize(),
+			beforeSend: () => {
+				$('#btn_save').prop('disabled', true)
+			}
+		}).fail(e => {
+			console.log(e)
+			$('#btn_save').prop('disabled', false)
+		}).done(e => {
+			console.log(e)
+
+			if (e.code == 200) {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Success...',
+					text: e.message,
+					showConfirmButton: false,
+					timer: 2000,
+					timerProgressBar: true,
+					toast: true,
+				}).then((res) => {
+					window.location.reload();
+				});
+			}
+		})
 	}
 </script>

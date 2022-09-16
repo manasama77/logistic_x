@@ -46,77 +46,57 @@
 									</div>
 									<div class="form-group">
 										<label for="code">Kode Stock Masuk <span class="text-danger">*</span></label>
-										<?php $readonly = ($arr[0]['state'] == "Proses") ? "readonly" : null; ?>
-										<input type="text" class="form-control" id="code" name="code" placeholder="Kode Stock Masuk" value="<?= $arr[0]['code']; ?>" <?= $readonly; ?> required />
-										<input type="hidden" id="old_code" name="old_code" value="<?= $arr[0]['code']; ?>" required />
-										<?php $disabled = ($arr[0]['state'] == "Proses") ? "disabled" : null; ?>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="auto_generate_code" name="auto_generate_code" value="yes" <?= $disabled; ?> />
-											<label for="auto_generate_code" class="form-check-label">Auto Generate Code</label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="no_po">No PO</label>
-										<input type="text" class="form-control" id="no_po" name="no_po" placeholder="No PO" value="<?= $arr[0]['no_po']; ?>" />
-									</div>
-									<div class="form-group">
-										<label for="no_do">No DO</label>
-										<input type="text" class="form-control" id="no_do" name="no_do" placeholder="No DO" value="<?= $arr[0]['no_do']; ?>" />
+										<input type="text" class="form-control" id="code" name="code" placeholder="Kode Stock Masuk" value="<?= $arr[0]['code']; ?>" required readonly />
 									</div>
 									<div class="form-group">
 										<label for="description">Keterangan</label>
 										<textarea class="form-control" id="description" name="description" placeholder="Keterangan"><?= $arr[0]['description']; ?></textarea>
 									</div>
 								</div>
-								<?php if (!$arr[0]['no_po']) { ?>
-									<div class="col-sm-12 col-md-3">
-										<div class="form-group">
-											<label for="item_id">Barang</label>
-											<select class="form-control" id="item_id" name="item_id">
-												<option value=""></option>
-												<?php foreach ($item->result() as $key) { ?>
-													<option value="<?= $key->id; ?>" data-satuan="<?= $key->unit_name; ?>">(<?= $key->code; ?>) <?= $key->name; ?></option>
-												<?php } ?>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="qty">Qty</label>
-											<input type="number" class="form-control" id="qty" name="qty" placeholder="Qty" />
-										</div>
-										<div class="form-group">
-											<button type="button" class="btn btn-primary btn-block" id="btn_add">
-												<i class="fas fa-plus"></i> Edit Barang
-											</button>
+								<div class="col-sm-12 col-md-8">
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<label for="item_id">Barang</label>
+												<select class="form-control" id="item_id" name="item_id" data-placeholder="Pilih Barang">
+													<option value=""></option>
+													<?php foreach ($item->result() as $key) { ?>
+														<option value="<?= $key->id; ?>" data-satuan="<?= $key->unit_name; ?>">(<?= $key->code; ?>) <?= $key->name; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="qty">Qty</label>
+												<input type="number" class="form-control" id="qty" name="qty" placeholder="Qty" min="1" />
+											</div>
+											<div class="form-group">
+												<button type="button" class="btn btn-primary btn-block" id="btn_add">
+													Update List Stock Masuk
+												</button>
+											</div>
+											<hr />
 										</div>
 									</div>
-								<?php } ?>
-								<?php $col = (!$arr[0]['no_po']) ? "col-md-5" : "col-md-8" ?>
-								<div class="col-sm-12 <?= $col; ?>">
-									<div class="table-responsive">
-										<?php $width = ($arr[0]['no_po']) ? "min-width: 950px;" : null ?>
-										<table class="table table-bordered table-sm" style="<?= $width; ?>">
-											<caption>List Stock Masuk</caption>
-											<thead class="bg-info">
-												<tr>
-													<?php if (!$arr[0]['no_po']) { ?>
-														<th class="text-center"><i class="fas fa-cog"></i></th>
-													<?php } ?>
-													<th>Barang</th>
-													<th>Qty Request</th>
-													<?php if ($arr[0]['no_po']) { ?>
-														<th style="min-width: 120px;">Qty Diterima</th>
-														<th style="min-width: 250px;">Tanggal & Jam Diterima</th>
-														<th>Keterangan</th>
-													<?php } ?>
-												</tr>
-											</thead>
-											<tbody id="v_list">
-												<tr>
-													<?php $colspan = ($arr[0]['no_po']) ? 5 : 3 ?>
-													<td colspan="<?= $colspan; ?>" class="text-center">Data Kosong</td>
-												</tr>
-											</tbody>
-										</table>
+									<div class="row">
+										<div class="col">
+											<div class="table-responsive">
+												<table class="table table-bordered table-sm">
+													<caption>List Stock Masuk</caption>
+													<thead class="bg-info">
+														<tr>
+															<th class="text-center"><i class="fas fa-cog"></i></th>
+															<th>Barang</th>
+															<th>Qty Request</th>
+														</tr>
+													</thead>
+													<tbody id="v_list">
+														<tr>
+															<td colspan="3" class="text-center">Data Kosong</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

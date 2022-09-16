@@ -58,7 +58,7 @@ class M_stock_masuk extends CI_Model
             $no_po                     = $stock_in_request->no_po;
             $no_do                     = $stock_in_request->no_do;
             $request_datetime          = $stock_in_request->request_datetime;
-            $request_datetime_formated = full_tanggal_jam_indo_no_dash($stock_in_request->request_datetime);
+            $request_datetime_formated = tanggal_jam_indo_no_dash_plain($stock_in_request->request_datetime);
             $state                     = $stock_in_request->state;
             $description               = $stock_in_request->description;
             $items                     = '';
@@ -132,6 +132,7 @@ class M_stock_masuk extends CI_Model
     public function get_item($where)
     {
         $this->db->select([
+            'stock_in_request_items.id as stock_in_request_item_id',
             'stock_in_request_items.item_id',
             'items.code as item_code',
             'items.name as item_name',
@@ -139,6 +140,7 @@ class M_stock_masuk extends CI_Model
             'stock_in_request_items.qty_receive',
             'stock_in_request_items.datetime_receive',
             'stock_in_request_items.description',
+            'stock_in_request_items.state_item',
             'units.name as unit_name',
         ]);
         $this->db->join('items', 'items.id = stock_in_request_items.item_id', 'left');

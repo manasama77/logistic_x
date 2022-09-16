@@ -70,6 +70,7 @@ if (isset($vitamin_css)) {
 	<script src="<?= base_url(); ?>public/js/jquery.blockUI.js"></script>
 	<script src="<?= base_url(); ?>public/js/sweetalert2.min.js"></script>
 	<script src="<?= base_url(); ?>public/plugin/datetime-picker/jquery.datetimepicker.full.min.js"></script>
+	<script src="<?= base_url(); ?>public/plugin/adminlte/plugins/select2/js/select2.full.min.js"></script>
 
 
 	<!-- DataTables  & Plugins -->

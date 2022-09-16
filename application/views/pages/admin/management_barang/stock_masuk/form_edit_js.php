@@ -1,18 +1,15 @@
 <script>
 	const idEdit = $('#id_edit').val()
 	const mainPageUrl = `<?= base_url('management_barang/stock_masuk'); ?>`
-	let autoGenerateCode = document.getElementById('auto_generate_code')
 	let listItem = []
 
 	$(document).ready(function() {
+		$('#item_id').select2({
+			allowClear: true
+		})
+
 		getListItem()
-		autoGenerateCode.onchange = evt => {
-			if (autoGenerateCode.checked) {
-				$('#code').prop('readonly', true).val('')
-			} else {
-				$('#code').prop('readonly', false).val('')
-			}
-		}
+
 
 		$('#btn_add').on('click', e => {
 			let itemId = parseInt($('#item_id').val())
@@ -75,10 +72,6 @@
 					request_date: $('#request_date').val(),
 					request_time: $('#request_time').val(),
 					code: $('#code').val(),
-					old_code: $('#old_code').val(),
-					auto_generate_code: ($('#auto_generate_code:checked').val()) ? "yes" : "no",
-					no_po: $('#no_po').val(),
-					no_do: $('#no_do').val(),
 					description: $('#description').val(),
 					list_item: listItem,
 				},
@@ -139,8 +132,10 @@
 		let itemIndex = listItem.findIndex(x => x.itemId === itemId)
 
 		if (itemIndex >= 0) {
+			// Update Qty
 			listItem[itemIndex]['qty'] = listItem[itemIndex]['qty'] + qty
 		} else {
+			// Create New Data
 			listItem.push({
 				itemId,
 				itemName,
@@ -149,7 +144,7 @@
 			})
 		}
 
-		$('#item_id').val('')
+		$('#item_id').val('').change()
 		$('#qty').val('')
 		renderListItem()
 	}
@@ -234,30 +229,17 @@
 			console.log(e);
 			if (e.code == 200) {
 				e.data.forEach(i => {
-					let itemId = i.item_id
-					let itemName = `(${i.item_name}) ${i.item_name}`
-					let qty_request = i.qty_request
-					let qty_receive = i.qty_receive
+					let itemId = parseInt(i.item_id)
+					let itemName = `(${i.item_code}) ${i.item_name}`
+					let qty = parseInt(i.qty_request)
 					let itemSatuan = i.unit_name
-					let datetimeReceive = (i.datetime_receive) ?? null
 					let description = (i.description) ?? ""
-
-					let dateReceive = null
-					let timeReceive = null
-					if (datetimeReceive) {
-						let momentDatetimeReceive = moment(datetimeReceive)
-						dateReceive = momentDatetimeReceive.format("YYYY-MM-D")
-						timeReceive = momentDatetimeReceive.format("HH:mm")
-					}
 
 					listItem.push({
 						itemId,
 						itemName,
-						qty_request,
-						qty_receive,
+						qty,
 						itemSatuan,
-						dateReceive,
-						timeReceive,
 						description,
 					})
 				})
