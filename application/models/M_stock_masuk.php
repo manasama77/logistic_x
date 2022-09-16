@@ -48,6 +48,7 @@ class M_stock_masuk extends CI_Model
             $this->db->where_in('stock_in_request_items.item_id', $this->input->get('item_id'));
         }
 
+        $this->db->group_by('stock_in_requests.id');
         $stock_in_requests = $this->db->get('stock_in_requests');
 
         $data = [];

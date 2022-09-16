@@ -382,7 +382,9 @@ class StockMasukController extends CI_Controller
                 $state            = $key1->state;
                 $description      = $key1->description;
 
-                $data['request_datetime']      = $request_datetime;
+                $dt_obj = new DateTime($request_datetime);
+
+                $data['request_datetime']      = $dt_obj->format("Y-m-d H:i");
                 $data['request_datetime_indo'] = tanggal_jam_indo_no_dash_plain($request_datetime);
                 $data['code']                  = $code;
                 $data['no_po']                 = $no_po;
@@ -396,13 +398,15 @@ class StockMasukController extends CI_Controller
 
                 if ($arr_items->num_rows() > 0) {
                     foreach ($arr_items->result() as $key2) {
+                        $dt_obj_item = new DateTime($key2->datetime_receive);
+
                         $stock_in_request_item_id = $key2->stock_in_request_item_id;
                         $item_id                  = $key2->item_id;
                         $item_code                = $key2->item_code;
                         $item_name                = $key2->item_name;
                         $qty_request              = $key2->qty_request;
                         $qty_receive              = $key2->qty_receive;
-                        $datetime_receive         = $key2->datetime_receive;
+                        $datetime_receive         = $dt_obj_item->format('Y-m-d H:i');
                         $description              = $key2->description;
                         $unit_name                = $key2->unit_name;
                         $state_item               = $key2->state_item;
@@ -446,9 +450,16 @@ class StockMasukController extends CI_Controller
         if ($no_do) {
             if (count($qty_receive) > 0) {
                 foreach ($stock_in_request_item_id as $key => $val) {
+                    $x              = $this->M_core->get('stock_in_request_items', 'item_id, state_item', ['id' => $val]);
+                    $item_id        = $x->row()->item_id;
+                    $state_item_old = $x->row()->state_item;
+
+                    if ($state_item_old == "Menunggu") {
+                        $exec = $this->M_item->update_stock($item_id, $qty_receive[$key]);
+                    }
+
                     $dt = new DateTime($datetime_receive[$key]);
                     $dt->createFromFormat('d-M-Y H:i', $datetime_receive[$key]);
-
                     $data = [
                         'qty_receive'      => $qty_receive[$key],
                         'datetime_receive' => ($datetime_receive[$key]) ? $dt->format('Y-m-d H:i:s') : null,

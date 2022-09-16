@@ -91,8 +91,10 @@
 		$('#v_no_po').on('change', e => {
 			if ($('#v_no_po').val().length == 0) {
 				$('#v_no_do').prop('disabled', true)
+				$('#v_state').val('Menunggu')
 			} else {
 				$('#v_no_do').prop('disabled', false)
+				$('#v_state').val('Proses')
 			}
 		})
 
@@ -105,26 +107,6 @@
 				$('input[name^=qty_receive]').prop('disabled', false)
 				$('input[name^=datetime_receive]').prop('disabled', false)
 				$('select[name^=state_item]').prop('disabled', false)
-			}
-		})
-
-		$('#v_state').on('change', e => {
-			if ($('#v_state').val() == "Selesai") {
-				$('#v_no_po').prop('disabled', true)
-				$('#v_no_do').prop('disabled', true)
-				$('#v_state').prop('disabled', true)
-				$('input[name^=qty_receive]').prop('disabled', true)
-				$('input[name^=datetime_receive]').prop('disabled', true)
-				$('select[name^=state_item]').prop('disabled', true)
-				$('#btn_save').prop('disabled', true)
-			} else {
-				$('#v_no_po').prop('disabled', false)
-				$('#v_no_do').prop('disabled', false)
-				$('#v_state').prop('disabled', false)
-				$('input[name^=qty_receive]').prop('disabled', false)
-				$('input[name^=datetime_receive]').prop('disabled', false)
-				$('select[name^=state_item]').prop('disabled', false)
-				$('#btn_save').prop('disabled', false)
 			}
 		})
 
@@ -227,7 +209,7 @@
 
 			let htmlnya = `
 				<tr>
-					<td colspan="4" class="text-center">Data Kosong</td>
+					<td colspan="5" class="text-center">Data Kosong</td>
 				</tr>
 			`
 
@@ -259,7 +241,7 @@
 								<div class="form-row justify-content-center p-0">
 									<div class="col-md-8">
 										<div class="input-group">
-											<input type="number" class="form-control" name="qty_receive[]" value="${qty_receive}" disabled />
+											<input type="number" class="form-control" name="qty_receive[]" value="${qty_receive}" min="0" max="${qty_request}" disabled />
 											<div class="input-group-append">
 												<span class="input-group-text">${unit_name}</span>
 											</div>
@@ -268,13 +250,13 @@
 								</div>
 							</td>
 							<td class="text-center">
-								<input type="text" class="form-control" name="datetime_receive[]" value="${datetime_receive}" disabled />
+								<input type="text" class="form-control" name="datetime_receive[]" value="${moment(e.data.request_datetime, 'YYYY-MM-DD hh:mm:ss').format('DD-MM-YYYY HH:mm')}" disabled />
 							</td>
 							<td class="text-center">
 								<select class="form-control" name="state_item[]" disabled>
-									<option (${state_item} == "Menunggu") : "selected" : null  value="Menunggu">Menunggu</option>
-									<option (${state_item} == "Terima") : "selected" : null value="Terima">Terima</option>
-									<option (${state_item} == "Tolak") : "selected" : null value="Tolak">Tolak</option>
+									<option ${(state_item == "Menunggu") ? "selected" : null}  value="Menunggu">Menunggu</option>
+									<option ${(state_item == "Terima") ? "selected" : null} value="Terima">Terima</option>
+									<option ${(state_item == "Tolak") ? "selected" : null} value="Tolak">Tolak</option>
 								</select>
 							</td>
 						</tr>
@@ -284,11 +266,26 @@
 
 			$('#v_items').html(htmlnya)
 			$('input[name^=datetime_receive]').datetimepicker({
-				format: 'd-m-Y H:i'
+				autoSize: true,
+				format: 'd-m-Y H:i',
+				showTodayButton: false,
+				autoclose: true,
+				minDate: moment(e.data.request_datetime, 'YYYY-MM-DD hh:mm:ss').format('YYYY-MM-DD'),
 			})
 			$('#v_no_po').val(e.data.no_po).change()
 			$('#v_no_do').val(e.data.no_do).change()
-			$('#v_state').val(e.data.state).change()
+			$('#v_state').val(e.data.state)
+
+			if (e.data.state == "Selesai" || e.data.state == "Tolak") {
+				$('#v_no_po').prop('disabled', true)
+				$('#v_no_do').prop('disabled', true)
+				$('#v_state').prop('disabled', true)
+				$('input[name^=qty_receive]').prop('disabled', true)
+				$('input[name^=datetime_receive]').prop('disabled', true)
+				$('select[name^=state_item]').prop('disabled', true)
+				$('#btn_save').prop('disabled', true)
+			}
+
 			$('#modal_detail').modal('show')
 
 			$.unblockUI()

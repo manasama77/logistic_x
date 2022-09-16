@@ -43,7 +43,7 @@ class L_admin
 			'is_active'  => 'yes',
 			'deleted_at' => null,
 		];
-		$arr = $this->ci->mcore->get('admin', '*', $where);
+		$arr = $this->ci->mcore->get('admins', '*', $where);
 
 		if ($arr->num_rows() == 1) {
 			$cookies_db = $arr->row()->cookies;

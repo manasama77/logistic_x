@@ -99,3 +99,17 @@ if (isset($vitamin_js)) {
 	$this->load->view('pages/admin/' . $vitamin_js);
 }
 ?>
+
+<script>
+	function comingSoon() {
+		Swal.fire({
+			position: 'top-end',
+			icon: 'warning',
+			title: 'Coming Soon',
+			toast: true,
+			showConfirmButton: false,
+			timer: 2000,
+			timerProgressBar: true,
+		});
+	}
+</script>

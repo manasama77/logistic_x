@@ -33,6 +33,15 @@ class M_item extends CI_Model
         $this->db->join('suppliers', 'suppliers.id = items.supplier_id', 'left');
         return $this->db->get('items');
     }
+
+    public function update_stock($id, $qty)
+    {
+        $this->db->set('qty', 'qty + ' . $qty, FALSE);
+        $this->db->set('updated_at', date('Y-m-d H:i:s'));
+        $this->db->set('updated_by', $this->session->userdata(SESI . 'id'));
+        $this->db->where('id', $id);
+        return $this->db->update('items');
+    }
 }
                         
 /* End of file M_item.php */

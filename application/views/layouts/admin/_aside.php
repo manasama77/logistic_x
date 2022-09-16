@@ -66,7 +66,8 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_keluar'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_keluar") ? "active" : ""; ?>">
+							<!-- <a href="<?= site_url('stock_keluar'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_keluar") ? "active" : ""; ?>"> -->
+							<a href="#" class="nav-link" onclick="comingSoon()">
 								<i class="nav-icon fas fa-cart-arrow-down"></i>
 								<p>
 									Stock Keluar
@@ -82,7 +83,8 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('stock_opname'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_opname") ? "active" : ""; ?>">
+							<!-- <a href="<?= site_url('stock_opname'); ?>" class="nav-link <?= ($this->uri->segment(2) == "stock_opname") ? "active" : ""; ?>" onclick="comingSoon()"> -->
+							<a href="#" class="nav-link" onclick="comingSoon()">
 								<i class="nav-icon fas fa-tasks"></i>
 								<p>
 									Stock Opname

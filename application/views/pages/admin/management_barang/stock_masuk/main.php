@@ -153,7 +153,7 @@
 
 <form id="form_detail">
 	<div class="modal fade" id="modal_detail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel">Detail</h5>
@@ -215,13 +215,13 @@
 					<h3>List Barang</h3>
 					<div class="table-responsive">
 						<table class="table table-bordered table-sm">
-							<thead>
+							<thead class="bg-black">
 								<tr>
 									<th>Barang</th>
 									<th>Qty Request</th>
 									<th class="text-center">Qty Diterima</th>
 									<th class="text-center">Tanggal Diterima</th>
-									<th class="text-center" style="width: 150px;">Status</th>
+									<th class="text-center">Status</th>
 								</tr>
 							</thead>
 							<tbody id="v_items">
